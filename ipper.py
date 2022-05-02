@@ -1,3 +1,6 @@
+# coding=utf-8
+
+
 import json
 import requests
 from os import popen
@@ -22,12 +25,14 @@ def is_valid(func):
 
 
 class Collector:
-    _source: str = "http://ipinfo.io/"
+    @staticmethod
+    def _source(ip: str) -> str:
+        return f"http://ipinfo.io/{ip}/json"
 
     @staticmethod
     @is_valid
     def get_ip_data(ip: str) -> dict:
-        response = requests.get(url=f"{Collector._source}{ip}/json")
+        response = requests.get(url=Collector()._source(ip))
 
         if response.status_code == 200:
             return json.loads(response.text)
@@ -50,4 +55,3 @@ if __name__ == "__main__":
     full_ip_data = collector.get_full_ip_data(address)
 
     print(f"{ip_data}\n\n\n{full_ip_data}")
-
