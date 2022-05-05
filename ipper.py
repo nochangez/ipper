@@ -36,8 +36,7 @@ class Collector:
 
         if response.status_code == 200:
             return json.loads(response.text)
-        else:
-            raise NetworkError(f"status code: [{response.status_code}]\nSeems host is down or server is not available")
+        raise NetworkError(f"status code: [{response.status_code}]\nSeems host is down or server is not available")
 
     @staticmethod
     @is_valid
