@@ -15,6 +15,7 @@ class NetworkError(BaseException):
 
 
 def is_valid(func):
+    
     def wrapper(ip: str):
         if (len(ip.split('.')) == 4) and (len(str(ip.split('.'))[0]) <= 255) \
                 and (len(str(ip.split('.'))[0]) >= 0):
